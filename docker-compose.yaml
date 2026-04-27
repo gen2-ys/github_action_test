@@ -1,16 +1,16 @@
 services:
   backend:
     build:
-      dockerfile: ./react_backend/Dockerfile
+      context: ./react_backend
+      dockerfile: Dockerfile
     container_name: skn25_backend
     restart: always
     command: >
-      sh -c "python manage.py collectstatic --noinput &&
-             python manage.py migrate &&
-             gunicorn config.wsgi:application --bind 0.0.0.0:8001 --workers 2"
+      sh -c  "python manage.py migrate &&
+             gunicorn react_backend.wsgi:application --bind 0.0.0.0:8001 --workers 2"
     volumes:
       - static_volume:/app/staticfiles
-      - db_volume:/app/db.sqlite3
+      - ./react_backend/db.sqlite3:/app/db.sqlite3  
     expose:
       - "8001"
   nginx:
@@ -25,5 +25,4 @@ services:
 
 volumes:
   static_volume:
-  db_volume:
 

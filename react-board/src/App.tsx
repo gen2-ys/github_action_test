@@ -39,7 +39,7 @@ const App: React.FC = () => {
                 onClick={() => window.location.href = '/'} 
                 style={{ cursor: 'pointer' }}
                 >
-            <span className="logo">SKN25</span>
+            <span className="logo">수업끝</span>
             <span className="site-title">게시판</span>
         </div>
 
